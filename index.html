@@ -1,66 +1,198 @@
-
-border-radius: 10px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT-Специалист | Ваше Имя</title>
+    <style>
+        /* Базовые стили и сброс */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        body {
+            background-color: #0a192f;
+            color: #ccd6f6;
+            line-height: 1.6;
         }
         
-        .project-img {
-            width: 100%;
-            height: 180px;
-            background: linear-gradient(45deg, #64ffda, #203a43);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: #0f2027;
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         
-        .project-content {
-            padding: 20px;
-        }
-        
-        footer {
-            text-align: center;
+        /* Стили шапки */
+        header {
             padding: 40px 0;
-            color: #8892b0;
+            text-align: center;
+            background-color: #0a192f;
+            border-bottom: 1px solid #64ffda;
         }
         
-        .social-links {
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #64ffda;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #ccd6f6;
+        }
+        
+        .title {
+            color: #64ffda;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        /* Основные секции */
+        section {
+            padding: 60px 0;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #ccd6f6;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #64ffda;
+        }
+        
+        /* Обо мне */
+        .about p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+        
+        /* Опыт работы */
+        .experience-item {
+            margin-bottom: 40px;
+            padding-left: 20px;
+            border-left: 2px solid #64ffda;
+        }
+        
+        .experience-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #ccd6f6;
+        }
+        
+        .company {
+            color: #64ffda;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        
+        .date {
+            color: #8892b0;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Контакты */
+        .contact-list {
+            list-style: none;
+        }
+        
+        .contact-list li {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .contact-list a {
+            color: #ccd6f6;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: inline-block;
+        }
+        
+        .contact-list a:hover {
+            color: #64ffda;
+            transform: translateY(-2px);
+        }
+        
+        .contact-icon {
+            margin-right: 10px;
+            color: #64ffda;
+        }
+        
+        /* Навыки */
+        .skills-container {
             display: flex;
-            justify-content: center;
-            gap: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
             margin-top: 20px;
         }
         
-        .social-links a {
+        .skill {
+            background-color: #112240;
+            padding: 10px 20px;
+            border-radius: 5px;
             color: #64ffda;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
+            font-size: 0.9rem;
         }
         
-        .social-links a:hover {
-            transform: translateY(-5px);
-            color: #fff;
+        /* Футер */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid #64ffda;
+            color: #8892b0;
+            font-size: 0.9rem;
         }
         
+        /* Адаптивность */
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
             
-            .title {
-                font-size: 1.2rem;
+            h2 {
+                font-size: 1.7rem;
             }
             
-            .contact-info {
-                flex-direction: column;
-                align-items: center;
+            .profile-img {width: 120px;
+                height: 120px;
+            }
+            
+            section {
+                padding: 40px 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .container {
+                width: 95%;
+                padding: 0 10px;
             }
         }
     </style>
@@ -68,175 +200,99 @@ border-radius: 10px;
 <body>
     <header>
         <div class="container">
-            <img src="https://i.pravatar.cc/300?img=32" alt="Алиханов Павел" class="profile-img">
-            <h1>Алиханов Павел</h1>
-            <p class="title">IT-специалист с 5-летним опытом</p>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>alihanov760@gmail.com</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <span>+7 (XXX) XXX-XX-XX</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>Москва, Россия</span>
-                </div>
-            </div>
+            <!-- Замените на путь к вашему реальному изображению -->
+            <img src="https://via.placeholder.com/150" alt="Ваше Фото" class="profile-img">
+            <h1>Ваше Имя</h1>
+            <p class="title">Ваша Должность</p>
         </div>
     </header>
-
-    <section id="about">
+    
+    <section class="about">
         <div class="container">
             <h2>Обо мне</h2>
-            <div class="section-content">
-                <p>IT-специалист с 5-летним опытом работы в разработке программного обеспечения и управлении проектами. Обладаю глубокими знаниями в современных технологиях и методологиях разработки. Стремлюсь к созданию эффективных и инновационных решений, которые приносят реальную пользу бизнесу.</p>
-                <p>Постоянно совершенствую свои навыки и слежу за последними тенденциями в IT-индустрии. Готов к сложным задачам и быстрому обучению новым технологиям.</p>
-            </div>
+            <p>Привет! Я IT-специалист с X летним опытом работы в сфере информационных технологий. Специализируюсь на веб-разработке, облачных решениях и автоматизации бизнес-процессов.</p>
+            <p>Моя цель - создавать эффективные и инновационные решения, которые помогают бизнесу достигать своих целей. Постоянно развиваюсь и изучаю новые технологии, чтобы оставаться в курсе последних тенденций IT-индустрии.</p>
         </div>
     </section>
-
-    <section id="experience">
+    
+    <section class="experience">
         <div class="container">
             <h2>Опыт работы</h2>
-            <div class="section-content">
-                <div class="experience-item">
-                    <h3>Ведущий разработчик</h3>
-                    <p class="date">2020 - настоящее время</p>
-                    <p>Разработка и архитектура высоконагруженных веб-приложений. Управление командой разработчиков. Внедрение современных практик CI/CD.</p>
-                </div>
-                <div class="experience-item">
-                    <h3>Разработчик программного обеспечения</h3>
-                    <p class="date">2018 - 2020</p>
-                    <p>Разработка backend и frontend компонентов для корпоративных приложений. Оптимизация производительности и устранение узких мест в системе.</p>
-                </div>
-                <div class="experience-item">
-                    <h3>Младший разработчик</h3>
-                    <p class="date">2017 - 2018</p>
-
-<p>Начало карьеры в IT. Изучение технологий и участие в разработке компонентов под руководством старших коллег.</p>
-                </div>
+            
+            <div class="experience-item">
+                <h3>Название должности</h3>
+                <p class="company">Название компании</p>
+                <p class="date">Январь 2020 - Настоящее время</p>
+                <p>Описание responsibilities и достижений на этой позиции. Ключевые проекты и результаты.</p>
+            </div>
+            
+            <div class="experience-item">
+                <h3>Название должности</h3>
+                <p class="company">Название компании</p>
+                <p class="date">Март 2017 - Декабрь 2019</p>
+                <p>Описание responsibilities и достижений на этой позиции. Ключевые проекты и результаты.</p>
+            </div>
+            
+            <div class="experience-item">
+                <h3>Название должности</h3>
+                <p class="company">Название компании</p>
+                <p class="date">Июнь 2015 - Февраль 2017</p>
+                <p>Описание responsibilities и достижений на этой позиции. Ключевые проекты и результаты.</p>
             </div>
         </div>
     </section>
-
-    <section id="skills">
+    
+    <section class="skills">
         <div class="container">
             <h2>Навыки</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Backend разработка</h3>
-                    <p>Python/Django</p>
-                    <div class="skill-bar">
-                        <div class="skill-level" style="width: 90%"></div>
-                    </div>
-                    <p>Node.js/Express</p>
-                    <div class="skill-bar">
-                        <div class="skill-level" style="width: 80%"></div>
-                    </div>
-                    <p>Java/Spring</p>
-                    <div class="skill-bar">
-                        <div class="skill-level" style="width: 70%"></div>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Frontend разработка</h3>
-                    <p>JavaScript/TypeScript</p>
-                    <div class="skill-bar">
-                        <div class="skill-level" style="width: 85%"></div>
-                    </div>
-                    <p>React</p>
-                    <div class="skill-bar">
-                        <div class="skill-level" style="width: 80%"></div>
-                    </div>
-                    <p>Vue.js</p>
-                    <div class="skill-bar">
-                        <div class="skill-level" style="width: 75%"></div>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Базы данных</h3>
-                    <p>PostgreSQL</p>
-                    <div class="skill-bar">
-                        <div class="skill-level" style="width: 85%"></div>
-                    </div>
-                    <p>MongoDB</p>
-                    <div class="skill-bar">
-                        <div class="skill-level" style="width: 75%"></div>
-                    </div>
-                    <p>Redis</p>
-                    <div class="skill-bar">
-                        <div class="skill-level" style="width: 70%"></div>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Другие навыки</h3>
-                    <p>Docker/Kubernetes</p>
-                    <div class="skill-bar">
-                        <div class="skill-level" style="width: 80%"></div>
-                    </div>
-                    <p>AWS/GCP</p>
-                    <div class="skill-bar">
-                        <div class="skill-level" style="width: 75%"></div>
-                    </div>
-                    <p>Git/CI-CD</p>
-                    <div class="skill-bar">
-                        <div class="skill-level" style="width: 90%"></div>
-                    </div>
-                </div>
+            <div class="skills-container">
+                <span class="skill">HTML5</span>
+                <span class="skill">CSS3</span>
+                <span class="skill">JavaScript</span>
+                <span class="skill">React</span>
+                <span class="skill">Node.js</span>
+                <span class="skill">Python</span>
+                <span class="skill">Базы данных</span>
+                <span class="skill">Git</span>
+                <span class="skill">Docker</span>
+                <span class="skill">AWS</span>
+                <span class="skill">Адаптивный дизайн</span>
+                <span class="skill">UI/UX</span>
             </div>
         </div>
     </section>
-
-    <section id="projects">
+    
+    <section class="contact">
         <div class="container">
-            <h2>Проекты</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-img">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>E-commerce платформа</h3>
-                        <p>Высоконагруженная платформа для онлайн-продаж с микросервисной архитектурой.</p>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-img">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Аналитическая система</h3>
-                        <p>Система сбора и анализа больших данных для бизнес-аналитики.</p>
-                    </div>
-                </div>
-                <div class="project-card">
-
-
-<div class="project-img">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Мобильное приложение</h3>
-                        <p>Кроссплатформенное приложение для управления задачами и проектами.</p>
-                    </div>
-                </div>
-            </div>
+            <h2>Контакты</h2>
+            <ul class="contact-list">
+                <li>
+                    <span class="contact-icon">📧</span>
+                    <a href="mailto:your.email@example.com">your.email@example.com</a>
+                </li>
+                <li>
+                    <span class="contact-icon">📱</span>
+                    <a href="tel:+79001234567">+7 (900) 123-45-67</a>
+                </li>
+                <li>
+                    <span class="contact-icon">💼</span>
+                    <a href="https://www.linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+                </li>
+                <li>
+                            <span class="contact-icon">🐙</span>
+                    <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+                </li>
+                <li>
+                    <span class="contact-icon">📁</span>
+                    <a href="https://portfolio.example.com" target="_blank">Портфолио</a>
+                </li>
+            </ul>
         </div>
     </section>
-
+    
     <footer>
         <div class="container">
-            <p>© 2023 Алиханов Павел. Все права защищены.</p>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-telegram"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-            </div>
+            <p>© 2023 Ваше Имя. Все права защищены.</p>
         </div>
     </footer>
 </body>
-</html>
