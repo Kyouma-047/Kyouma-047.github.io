@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT-Специалист | Ваше Имя</title>
+    <title>Экономический аналитический портал</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.4/build/global/luxon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.2.0"></script>
     <style>
-        /* Базовые стили и сброс */
+        /* Базовые стили */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
         }
         
         body {
-            background-color: #0a192f;
-            color: #ccd6f6;
+            background-color: #f5f7f9;
+            color: #333;
             line-height: 1.6;
         }
         
@@ -26,273 +29,618 @@
             padding: 0 20px;
         }
         
-        /* Стили шапки */
+        /* Шапка */
         header {
-            padding: 40px 0;
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6580 100%);
+            color: white;
+            padding: 25px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #4cd964;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #4cd964;
+        }
+        
+        /* Главный баннер */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1589810264340-0ce27bfbf751?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
             text-align: center;
-            background-color: #0a192f;
-            border-bottom: 1px solid #64ffda;
         }
         
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #64ffda;
-            margin-bottom: 20px;
-        }
-        
-        h1 {
+        .hero h1 {
             font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: #ccd6f6;
-        }
-        
-        .title {
-            color: #64ffda;
-            font-size: 1.2rem;
             margin-bottom: 20px;
         }
         
-        /* Основные секции */
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #4cd964;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #3cb054;
+        }
+        
+        /* Секции */
         section {
             padding: 60px 0;
         }
         
-        h2 {
-            font-size: 2rem;
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            color: #7f8c8d;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Графики */
+        .chart-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 25px;
             margin-bottom: 30px;
-            color: #ccd6f6;
             position: relative;
-            display: inline-block;
         }
         
-        h2:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background-color: #64ffda;
-        }
-        
-        /* Обо мне */
-        .about p {
+        .chart-title {
+            font-size: 1.4rem;
+            color: #2c3e50;
             margin-bottom: 20px;
-            font-size: 1.1rem;
-            max-width: 800px;
-        }
-        
-        /* Опыт работы */
-        .experience-item {
-            margin-bottom: 40px;
-            padding-left: 20px;
-            border-left: 2px solid #64ffda;
-        }
-        
-        .experience-item h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #ccd6f6;
-        }
-        
-        .company {
-            color: #64ffda;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-        }
-        
-        .date {
-            color: #8892b0;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
-        
-        /* Контакты */
-        .contact-list {
-            list-style: none;
-        }
-        
-        .contact-list li {
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-        
-        .contact-list a {
-            color: #ccd6f6;
-            text-decoration: none;
-            transition: color 0.3s;
-            display: inline-block;
-        }
-        
-        .contact-list a:hover {
-            color: #64ffda;
-            transform: translateY(-2px);
-        }
-        
-        .contact-icon {
-            margin-right: 10px;
-            color: #64ffda;
-        }
-        
-        /* Навыки */
-        .skills-container {
             display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 20px;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        .skill {
-            background-color: #112240;
-            padding: 10px 20px;
+        .chart-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .control-btn {
+            background-color: #f1f2f6;
+            border: none;
+            padding: 8px 15px;
             border-radius: 5px;
-            color: #64ffda;
-            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .control-btn:hover {
+            background-color: #dfe4ea;
+        }
+        
+        .control-btn.active {
+            background-color: #2c3e50;
+            color: white;
+        }
+        
+        /* Статьи */
+        .articles {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .article-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .article-img {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .article-content {
+            padding: 20px;
+        }
+        
+        .article-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .article-content p {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+        
+        .read-more {
+            color: #4cd964;
+            text-decoration: none;
+            font-weight: 600;
         }
         
         /* Футер */
         footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+        
+        .footer-column p, .footer-column a {
+            color: #bdc3c7;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .footer-column a:hover {
+            color: #4cd964;
+        }
+        
+        .copyright {
             text-align: center;
-            padding: 30px 0;
-            border-top: 1px solid #64ffda;
-            color: #8892b0;
-            font-size: 0.9rem;
+            padding-top: 20px;
+            border-top: 1px solid #3e546b;
+            color: #bdc3c7;
         }
         
         /* Адаптивность */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
+        @media (max-width: 992px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
             }
             
-            h2 {
-                font-size: 1.7rem;
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
             }
             
-            .profile-img {width: 120px;
-                height: 120px;
-            }
-            
-            section {
-                padding: 40px 0;
+            nav ul li {
+                margin: 0 10px;
             }
         }
         
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.7rem;
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
             }
             
-            h2 {
-                font-size: 1.5rem;
+            .hero p {
+                font-size: 1rem;
             }
             
-            .container {
-                width: 95%;
-                padding: 0 10px;
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .chart-title {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .chart-controls {
+                margin-top: 10px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 5px 0;
+            }
+            
+            .chart-controls {
+                flex-wrap: wrap;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Шапка -->
     <header>
-        <div class="container">
-            <!-- Замените на путь к вашему реальному изображению -->
-            <img src="https://via.placeholder.com/150" alt="Ваше Фото" class="profile-img">
-            <h1>Ваше Имя</h1>
-            <p class="title">Ваша Должность</p>
+        <div class="container header-content">
+            <div class="logo">Эконом<span>Аналитика</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#main">Главная</a></li>
+                    <li><a href="#charts">Графики</a></li>
+                    <li><a href="#articles">Статьи</a></li>
+                    <li><a href="#about">О нас</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
-    
-    <section class="about">
+
+    <!-- Главный баннер -->
+    <section class="hero">
         <div class="container">
-            <h2>Обо мне</h2>
-            <p>Привет! Я IT-специалист с X летним опытом работы в сфере информационных технологий. Специализируюсь на веб-разработке, облачных решениях и автоматизации бизнес-процессов.</p>
-            <p>Моя цель - создавать эффективные и инновационные решения, которые помогают бизнесу достигать своих целей. Постоянно развиваюсь и изучаю новые технологии, чтобы оставаться в курсе последних тенденций IT-индустрии.</p>
+            <h1>Анализ экономических показателей в реальном времени</h1>
+            <p>Исследуйте динамику ключевых экономических индикаторов с помощью интерактивных графиков и актуальных аналитических материалов</p>
+            <a href="#charts" class="btn">Смотреть графики</a>
         </div>
     </section>
-    
-    <section class="experience">
+
+    <!-- Секция с графиками -->
+    <section id="charts">
         <div class="container">
-            <h2>Опыт работы</h2>
-            
-            <div class="experience-item">
-                <h3>Название должности</h3>
-                <p class="company">Название компании</p>
-                <p class="date">Январь 2020 - Настоящее время</p>
-                <p>Описание responsibilities и достижений на этой позиции. Ключевые проекты и результаты.</p>
+            <div class="section-header">
+                <h2>Экономические индикаторы</h2>
+                <p>Динамика ключевых показателей с возможностью фильтрации по периодам</p>
             </div>
-            
-            <div class="experience-item">
-                <h3>Название должности</h3>
-                <p class="company">Название компании</p>
-                <p class="date">Март 2017 - Декабрь 2019</p>
-                <p>Описание responsibilities и достижений на этой позиции. Ключевые проекты и результаты.</p>
+
+            <!-- График 1: Курсы валют -->
+            <div class="chart-container">
+                <div class="chart-title">
+                    <h3>Динамика курсов валют</h3>
+                    <div class="chart-controls">
+                        <button class="control-btn active" data-period="week">Неделя</button>
+                        <button class="control-btn" data-period="month">Месяц</button>
+                        <button class="control-btn" data-period="quarter">Квартал</button>
+                        <button class="control-btn" data-period="year">Год</button>
+                    </div>
+                </div>
+                <canvas id="currencyChart"></canvas>
             </div>
-            
-            <div class="experience-item">
-                <h3>Название должности</h3>
-                <p class="company">Название компании</p>
-                <p class="date">Июнь 2015 - Февраль 2017</p>
-                <p>Описание responsibilities и достижений на этой позиции. Ключевые проекты и результаты.</p>
+
+            <!-- График 2: Инфляция -->
+            <div class="chart-container">
+                <div class="chart-title">
+                    <h3>Уровень инфляции</h3>
+                    <div class="chart-controls">
+                        <button class="control-btn active" data-period="week">Неделя</button>
+                        <button class="control-btn" data-period="month">Месяц</button>
+                        <button class="control-btn" data-period="quarter">Квартал</button>
+                        <button class="control-btn" data-period="year">Год</button>
+                    </div>
+                </div>
+                <canvas id="inflationChart"></canvas>
+            </div>
+
+            <!-- График 3: ВВП -->
+            <div class="chart-container">
+                <div class="chart-title">
+                    <h3>Динамика ВВП</h3>
+                    <div class="chart-controls">
+                        <button class="control-btn active" data-period="week">Неделя</button>
+                        <button class="control-btn" data-period="month">Месяц</button>
+                        <button class="control-btn" data-period="quarter">Квартал</button>
+                        <button class="control-btn" data-period="year">Год</button>
+                    </div>
+                </div>
+                <canvas id="gdpChart"></canvas>
             </div>
         </div>
     </section>
-    
-    <section class="skills">
+
+    <!-- Секция со статьями -->
+    <section id="articles">
         <div class="container">
-            <h2>Навыки</h2>
-            <div class="skills-container">
-                <span class="skill">HTML5</span>
-                <span class="skill">CSS3</span>
-                <span class="skill">JavaScript</span>
-                <span class="skill">React</span>
-                <span class="skill">Node.js</span>
-                <span class="skill">Python</span>
-                <span class="skill">Базы данных</span>
-                <span class="skill">Git</span>
-                <span class="skill">Docker</span>
-                <span class="skill">AWS</span>
-                <span class="skill">Адаптивный дизайн</span>
-                <span class="skill">UI/UX</span>
+            <div class="section-header">
+                <h2>Аналитические статьи</h2>
+                <p>Последние материалы по экономической тематике</p>
+            </div>
+
+            <div class="articles">
+                <div class="article-card">
+                    <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Экономика" class="article-img">
+                    <div class="article-content">
+                        <h3>Тенденции мировых рынков в 2023 году</h3>
+                        <p>Анализ текущей ситуации на мировых рынках и прогнозы на ближайшее будущее</p>
+                        <a href="#" class="read-more">Читать далее</a>
+                    </div>
+                </div>
+
+                <div class="article-card">
+                    <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Криптовалюты" class="article-img">
+                    <div class="article-content">
+                        <h3>Криптовалюты: перспективы регулирования</h3>
+                        <p>Как изменится рынок цифровых активов после введения новых правил</p>
+                        <a href="#" class="read-more">Читать далее</a>
+                    </div>
+                </div>
+
+                <div class="article-card">
+                    <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Недвижимость" class="article-img">
+                    <div class="article-content">
+                        <h3>Рынок недвижимости: что ждать в следующем квартале</h3>
+                        <p>Прогнозы изменения цен на жилье в условиях новой экономической политики</p>
+                        <a href="#" class="read-more">Читать далее</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-    
-    <section class="contact">
-        <div class="container">
-            <h2>Контакты</h2>
-            <ul class="contact-list">
-                <li>
-                    <span class="contact-icon">📧</span>
-                    <a href="mailto:your.email@example.com">your.email@example.com</a>
-                </li>
-                <li>
-                    <span class="contact-icon">📱</span>
-                    <a href="tel:+79001234567">+7 (900) 123-45-67</a>
-                </li>
-                <li>
-                    <span class="contact-icon">💼</span>
-                    <a href="https://www.linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
-                </li>
-                <li>
-                            <span class="contact-icon">🐙</span>
-                    <a href="https://github.com/yourusername" target="_blank">GitHub</a>
-                </li>
-                <li>
-                    <span class="contact-icon">📁</span>
-                    <a href="https://portfolio.example.com" target="_blank">Портфолио</a>
-                </li>
-            </ul>
-        </div>
-    </section>
-    
+
+    <!-- Футер -->
     <footer>
         <div class="container">
-            <p>© 2023 Ваше Имя. Все права защищены.</p>
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>О нас</h3>
+                    <p>Мы предоставляем актуальную экономическую информацию и аналитику для профессионалов и всех, кто интересуется экономикой.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <p>Email: info@econanalytica.ru</p>
+                    <p>Телефон: +7 (495) 123-45-67</p>
+                    <p>Адрес: Москва, ул. Экономическая, д. 25</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Полезные ссылки</h3>
+                    <a href="#">Центральный банк РФ</a>
+                    <a href="#">Минэкономразвития</a>
+                    <a href="#">Росстат</a>
+                    <a href="#">Международный валютный фонд</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2023 ЭкономАналитика. Все права защищены.</p>
+            </div>
         </div>
     </footer>
+
+    <script>
+        // Генерация случайных данных для графиков
+        function generateData(period, volatility = 10) {
+            let data = [];
+            let count = 0;
+            
+            switch(period) {
+                case 'week':
+                    count = 7;
+                    break;
+                case 'month':
+                    count = 30;
+                    break;
+                case 'quarter':
+                    count = 90;
+                    break;
+                case 'year':
+                    count = 365;
+                    break;
+                default:
+                    count = 7;
+            }
+            
+            let value = 70 + Math.random() * 30;
+            for (let i = 0; i < count; i++) {
+                value = value + (Math.random() - 0.5) * volatility;
+                data.push(value);
+            }
+            
+            return data;
+        }
+        
+        // Генерация дат для оси X
+        function generateDates(period) {
+            let dates = [];
+            let count = 0;
+            let date = DateTime.now();
+            
+            switch(period) {
+                case 'week':
+                    count = 7;
+                    break;
+                case 'month':
+                    count = 30;
+                    break;
+                case 'quarter':
+                    count = 90;
+                    break;
+                case 'year':
+                    count = 365;
+                    break;
+                default:
+                    count = 7;
+            }
+            
+            for (let i = count - 1; i >= 0; i--) {
+                dates.push(date.minus({days: i}).toISODate());
+            }
+            
+            return dates;
+        }
+        
+        // Создание графика
+        function createChart(ctx, type, labels, datasets, options = {}) {
+            return new Chart(ctx, {
+                type: type,
+                data: {
+                    labels: labels,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    },
+                    ...options
+                }
+            });
+        }
+        
+        // Инициализация графиков при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Данные для графиков
+            const dates = generateDates('week');
+            
+            // График курсов валют
+            const currencyCtx = document.getElementById('currencyChart').getContext('2d');
+            const currencyChart = createChart(currencyCtx, 'line', dates, [
+                {
+                    label: 'USD/RUB',
+                    data: generateData('week', 2),
+                    borderColor: 'rgb(54, 162, 235)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.1)',
+                    tension: 0.3,
+                    fill: true
+                },
+                {
+                    label: 'EUR/RUB',
+                    data: generateData('week', 2),
+                    borderColor: 'rgb(255, 99, 132)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                    tension: 0.3,
+                    fill: true
+                }
+            ]);
+            
+            // График инфляции
+            const inflationCtx = document.getElementById('inflationChart').getContext('2d');
+            const inflationChart = createChart(inflationCtx, 'bar', dates, [
+                {
+                    label: 'Инфляция (%)',
+                    data: generateData('week', 0.5),
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderColor: 'rgb(75, 192, 192)',
+                    borderWidth: 1
+                }
+            ]);
+            
+            // График ВВП
+            const gdpCtx = document.getElementById('gdpChart').getContext('2d');
+            const gdpChart = createChart(gdpCtx, 'line', dates, [
+                {
+                    label: 'ВВП (трлн руб.)',
+                    data: generateData('week', 0.2),
+                    borderColor: 'rgb(153, 102, 255)',
+                    backgroundColor: 'rgba(153, 102, 255, 0.1)',
+                    tension: 0.3,
+                    fill: true
+                }
+            ]);
+            
+            // Обработчики для кнопок управления графиками
+            document.querySelectorAll('.chart-controls').forEach(controls => {
+                controls.addEventListener('click', function(e) {
+                    if (e.target.classList.contains('control-btn')) {
+                        // Активируем нажатую кнопку
+                        const buttons = this.querySelectorAll('.control-btn');
+                        buttons.forEach(btn => btn.classList.remove('active'));
+                        e.target.classList.add('active');
+                        
+                        // Определяем период
+                        const period = e.target.dataset.period;
+                        const newDates = generateDates(period);
+                        
+                        // Обновляем соответствующий график
+                        const chartId = this.closest('.chart-container').querySelector('canvas').id;
+                        
+                        if (chartId === 'currencyChart') {
+                            currencyChart.data.labels = newDates;
+                            currencyChart.data.datasets[0].data = generateData(period, 2);
+                            currencyChart.data.datasets[1].data = generateData(period, 2);
+                            currencyChart.update();
+                        } else if (chartId === 'inflationChart') {
+                            inflationChart.data.labels = newDates;
+                            inflationChart.data.datasets[0].data = generateData(period, 0.5);
+                            inflationChart.update();
+                        } else if (chartId === 'gdpChart') {
+                            gdpChart.data.labels = newDates;
+                            gdpChart.data.datasets[0].data = generateData(period, 0.2);
+                            gdpChart.update();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
+</html>
