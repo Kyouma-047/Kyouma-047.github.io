@@ -3,591 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мониторинг станков ЧПУ</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Любовное признание для Марии</title>
     <style>
-        :root {
-            --primary: #2c3e50;
-            --secondary: #34495e;
-            --accent: #3498db;
-            --success: #2ecc71;
-            --warning: #f39c12;
-            --danger: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --text: #333;
-            --text-light: #fff;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            background-attachment: fixed;
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        header {
-            background-color: rgba(44, 62, 80, 0.9);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-        }
-        
-        .header-content {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            min-height: 100vh;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo i {
-            font-size: 2rem;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 1.5rem;
-        }
-        
-        nav ul li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 500;
-            padding: 5px 10px;
-            border-radius: 4px;
-        }
-        
-        nav ul li a:hover {
-            color: var(--accent);
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-        
-        .menu-toggle span {
-            height: 3px;
-            width: 25px;
-            background: var(--light);
-            margin-bottom: 5px;
-            border-radius: 2px;
-            transition: all 0.3s;
-        }
-        
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-            padding: 30px 0;
-        }
-        
-        @media (min-width: 992px) {
-            .main-content {
-                grid-template-columns: 2fr 1fr;
-            }
+            padding: 20px;
         }
         
         .card {
-            background: rgba(52, 73, 94, 0.9);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-        }
-        
-        .card h2 {
-            color: var(--accent);
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--accent);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .status-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .status-item {
-            background: rgba(41, 128, 185, 0.2);
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            transition: all 0.3s;
-            border-left: 5px solid var(--accent);
-        }
-        
-        .status-item.running {
-            border-left-color: var(--success);
-            background: rgba(46, 204, 113, 0.15);
-        }
-        
-        .status-item.idle {
-            border-left-color: var(--warning);
-            background: rgba(243, 156, 18, 0.15);
-        }
-        
-        .status-item.stopped {
-            border-left-color: var(--danger);
-            background: rgba(231, 76, 60, 0.15);
-        }
-        
-        .status-item h3 {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        
-        table th, table td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        table th {
-            background-color: rgba(41, 128, 185, 0.3);
-            color: var(--accent);
-        }
-        
-        table tr:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-        
-        .info-box {
-            background-color: rgba(41, 128, 185, 0.2);
-            border-left: 4px solid var(--accent);
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 0 8px 8px 0;
-        }
-        
-        footer {
-            background-color: rgba(44, 62, 80, 0.9);
-            padding: 30px 0;
-            text-align: center;
-            margin-top: 40px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .last-update {
-            text-align: right;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-top: 15px;
-        }
-        
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: flex;
-            }
-            
-            nav ul {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: rgba(44, 62, 80, 0.95);
-                padding: 20px;
-                backdrop-filter: blur(10px);
-            }
-            
-            nav ul.show {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 12px 0;
-            }
-            
-            .status-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .tooltip {
             position: relative;
-            display: inline-block;
-            border-bottom: 1px dotted var(--accent);
-            cursor: help;
-        }
-        
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 220px;
-            background-color: var(--secondary);
-            color: var(--text-light);
-            text-align: center;
-            border-radius: 6px;
-            padding: 10px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-        
-        .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 200px;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--accent);
-            animation: spin 1s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        .btn {
-            display: inline-block;
-            background: var(--accent);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            border: none;
+            width: 100%;
+            max-width: 500px;
+            height: 600px;
+            perspective: 1000px;
             cursor: pointer;
         }
         
-        .btn:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .card-front {
+            background: linear-gradient(45deg, #ff758c 0%, #ff7eb3 100%);
+            color: white;
+        }
+        
+        .card-back {
+            background: white;
+            color: #333;
+            transform: rotateY(180deg);
+            overflow-y: auto;
+        }
+        
+        .heart {
+            font-size: 100px;
+            color: white;
+            margin-bottom: 30px;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff4081;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .signature {
+            margin-top: 30px;
+            font-style: italic;
+            align-self: flex-end;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            5% { transform: scale(1.1); }
+            10% { transform: scale(1); }
+            15% { transform: scale(1.1); }
+            20% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+        
+        .instructions {
+            position: absolute;
+            bottom: 20px;
+            color: white;
+            font-size: 14px;
+            opacity: 0.8;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container header-content">
-            <div class="logo">
-                <i class="fas fa-cogs"></i>
-                <span>ЧПУ Монитор</span>
+    <div class="card">
+        <div class="card-inner">
+            <div class="card-front">
+                <div class="heart">❤️</div>
+                <h1>Для самой особенной</h1>
+                <p>Наведи курсор или коснись, чтобы открыть</p>
+                <div class="instructions">(Наведи на открытку, чтобы перевернуть)</div>
             </div>
-            <div class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="card-back">
+                <h1>Моей дорогой <span class="name">Марии</span></h1>
+                <p>С того момента, как ты появилась в моей жизни, всё изменилось к лучшему.</p>
+                <p>Твоя улыбка заставляет мое сердце биться чаще, твой смех — самая прекрасная музыка, а твои глаза — это бездонные океаны, в которых я готов потеряться.</p>
+                <p>Каждый день с тобой — это подарок судьбы, который я ценю больше всего на свете.</p>
+                <p>Я люблю тебя не только за то, кто ты есть, но и за то, кем я становлюсь, когда я рядом с тобой.</p>
+                <p>Ты вдохновляешь меня становиться лучше каждый день.</p>
+                <p>С тобой я понял, что такое настоящее счастье.</p>
+                <p class="signature">С любовью, твой воздыхатель</p>
             </div>
-            <nav>
-                <ul id="navMenu">
-                    <li><a href="#status"><i class="fas fa-chart-line"></i> Состояние</a></li>
-                    <li><a href="#g-codes"><i class="fas fa-code"></i> G-коды</a></li>
-                    <li><a href="#m-codes"><i class="fas fa-cog"></i> M-коды</a></li>
-                    <li><a href="#resources"><i class="fas fa-book"></i> Ресурсы</a></li>
-                </ul>
-            </nav>
         </div>
-    </header>
-
-    <div class="container main-content">
-        <main>
-            <section id="status" class="card">
-                <h2><i class="fas fa-chart-line"></i> Текущее состояние станков</h2>
-                <div class="status-grid" id="machineStatus">
-                    <div class="loading">
-                        <div class="spinner"></div>
-                        <p>Загрузка данных о станках...</p>
-                    </div>
-                </div>
-                <div class="last-update" id="lastUpdate">
-                    Последнее обновление: загрузка...
-                </div>
-            </section>
-
-            <section id="g-codes" class="card">
-                <h2><i class="fas fa-code"></i> Часто используемые G-коды</h2>
-                <div class="info-box">
-                    <i class="fas fa-info-circle"></i> G-коды управляют движением инструмента и задают геометрию обработки.
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Код</th>
-                            <th>Описание</th>
-                            <th>Пример</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span class="tooltip">G00<span class="tooltiptext">Быстрая позиционная подача</span></span></td>
-                            <td>Линейное перемещение с максимальной скоростью</td>
-                            <td>G00 X10 Y20</td>
-                        </tr>
-                        <tr>
-                            <td><span class="tooltip">G01<span class="tooltiptext">Линейная интерполяция</span></span></td>
-                            <td>Линейное перемещение с рабочей подачей</td>
-                            <td>G01 X10 Y20 F300</td>
-                        </tr>
-                        <tr>
-                            <td><span class="tooltip">G02/G03<span class="tooltiptext">Круговая интерполяция</span></span></td>
-                            <td>Круговая интерполяция (по/против часовой стрелки)</td>
-                            <td>G02 X10 Y20 I5 J0</td>
-                        </tr>
-                        <tr>
-                            <td><span class="tooltip">G20/G21<span class="tooltiptext">Система измерений</span></span></td>
-                            <td>Дюймы/Миллиметры</td>
-                            <td>G21 (миллиметры)</td>
-                        </tr>
-                        <tr>
-                            <td><span class="tooltip">G90/G91<span class="tooltiptext">Система координат</span></span></td>
-                            <td>Абсолютные/относительные координаты</td>
-                            <td>G90 (абсолютные)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <section id="m-codes" class="card">
-                <h2><i class="fas fa-cog"></i> Часто используемые M-коды</h2>
-                <div class="info-box">
-                    <i class="fas fa-info-circle"></i> M-коды управляют вспомогательными функциями станка (охлаждение, шпиндель и т.д.)
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Код</th>
-                            <th>Описание</th>
-                            <th>Пример</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span class="tooltip">M00<span class="tooltiptext">Программная остановка</span></span></td>
-                            <td>Программная остановка</td>
-                            <td>M00</td>
-                        </tr>
-                        <tr>
-                            <td><span class="tooltip">M03/M04<span class="tooltiptext">Вращение шпинделя</span></span></td>
-                            <td>Включение шпинделя (по/против часовой стрелки)</td>
-                            <td>M03 S2000</td>
-                        </tr>
-                        <tr>
-                            <td><span class="tooltip">M05<span class="tooltiptext">Остановка шпинделя</span></span></td>
-                            <td>Выключение шпинделя</td>
-                            <td>M05</td>
-                        </tr>
-                        <tr>
-                            <td><span class="tooltip">M08/M09<span class="tooltiptext">Охлаждение</span></span></td>
-                            <td>Включение/выключение охлаждения</td>
-                            <td>M08</td>
-                        </tr>
-                        <tr>
-                            <td><span class="tooltip">M30<span class="tooltiptext">Конец программы</span></span></td>
-                            <td>Конец программы и возврат к началу</td>
-                            <td>M30</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-        </main>
-
-        <aside>
-            <section class="card">
-                <h2><i class="fas fa-bolt"></i> Быстрый доступ</h2>
-                <ul style="list-style: none; padding: 10px;">
-                    <li style="margin-bottom: 15px;"><a href="#status" style="color: var(--accent); text-decoration: none; display: block; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;"><i class="fas fa-chart-line"></i> Текущее состояние</a></li>
-                    <li style="margin-bottom: 15px;"><a href="#g-codes" style="color: var(--accent); text-decoration: none; display: block; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;"><i class="fas fa-code"></i> Справочник G-кодов</a></li>
-                    <li style="margin-bottom: 15px;"><a href="#m-codes" style="color: var(--accent); text-decoration: none; display: block; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;"><i class="fas fa-cog"></i> Справочник M-кодов</a></li>
-                    <li style="margin-bottom: 15px;"><a href="#resources" style="color: var(--accent); text-decoration: none; display: block; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;"><i class="fas fa-book"></i> Полезные ресурсы</a></li>
-                </ul>
-            </section>
-
-            <section id="resources" class="card">
-                <h2><i class="fas fa-book"></i> Полезные ресурсы</h2>
-                <ul style="list-style: none; padding: 10px;">
-                    <li style="margin-bottom: 15px;"><a href="#" style="color: var(--accent); text-decoration: none; display: block; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;"><i class="fas fa-book"></i> Руководство оператора</a></li>
-                    <li style="margin-bottom: 15px;"><a href="#" style="color: var(--accent); text-decoration: none; display: block; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;"><i class="fas fa-file-pdf"></i> Техническая документация</a></li>
-                    <li style="margin-bottom: 15px;"><a href="#" style="color: var(--accent); text-decoration: none; display: block; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;"><i class="fas fa-desktop"></i> ЧПУ программное обеспечение</a></li>
-                    <li style="margin-bottom: 15px;"><a href="#" style="color: var(--accent); text-decoration: none; display: block; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;"><i class="fas fa-graduation-cap"></i> Обучение ЧПУ</a></li>
-                </ul>
-            </section>
-
-            <section class="card">
-                <h2><i class="fas fa-phone"></i> Экстренные контакты</h2>
-                <ul style="list-style: none; padding: 10px;">
-                    <li style="margin-bottom: 15px; padding: 10px; background: rgba(231, 76, 60, 0.2); border-radius: 5px;"><i class="fas fa-phone"></i> Техподдержка: <strong>1234</strong></li>
-                    <li style="margin-bottom: 15px; padding: 10px; background: rgba(243, 156, 18, 0.2); border-radius: 5px;"><i class="fas fa-tools"></i> Механик: <strong>5678</strong></li>
-                    <li style="margin-bottom: 15px; padding: 10px; background: rgba(46, 204, 113, 0.2); border-radius: 5px;"><i class="fas fa-user-tie"></i> Начальник цеха: <strong>9012</strong></li>
-                </ul>
-            </section>
-        </aside>
     </div>
-
-    <footer>
-        <div class="container">
-            <p>ЧПУ Монитор © 2023 | Система мониторинга станков с ЧПУ</p>
-            <p>Данные загружаются с: https://cnc.kovalev.team/get/3</p>
-        </div>
-    </footer>
-
-    <script>
-        // Мобильное меню
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            document.getElementById('navMenu').classList.toggle('show');
-        });
-        
-        // Функция для получения данных с API
-        async function fetchMachineData() {
-            try {
-                const response = await fetch('https://cnc.kovalev.team/get/3');
-                if (!response.ok) {
-                    throw new Error('Ошибка сети');
-                }
-                const data = await response.json();
-                updateMachineStatus(data);
-            } catch (error) {
-                console.error('Ошибка при получении данных:', error);
-                document.getElementById('machineStatus').innerHTML = `
-                    <div class="status-item stopped">
-                        <h3><i class="fas fa-exclamation-triangle"></i> Ошибка загрузки данных</h3>
-                        <p>Не удалось получить данные с сервера</p>
-                        <p>Проверьте подключение к интернету</p>
-                    </div>
-                `;
-            }
-        }
-        
-        // Функция для обновления статуса станков
-        function updateMachineStatus(data) {
-            const statusContainer = document.getElementById('machineStatus');
-            const lastUpdateElement = document.getElementById('lastUpdate');
-            
-            // Форматируем время последнего обновления
-            const now = new Date();
-            const lastUpdate = now.toLocaleTimeString('ru-RU');
-            
-            // Обновляем время последнего обновления
-            lastUpdateElement.textContent = `Последнее обновление: ${lastUpdate}`;
-            
-            // Очищаем контейнер
-            statusContainer.innerHTML = '';
-            
-            // Добавляем данные о станке
-            const statusClass = data.status === 'running' ? 'running' : 
-                               data.status === 'idle' ? 'idle' : 'stopped';
-            
-            const statusText = data.status === 'running' ? 'Работает' : 
-                              data.status === 'idle' ? 'Ожидание' : 'Остановлен';
-            
-            const icon = data.status === 'running' ? 'fa-play-circle' : 
-                        data.status === 'idle' ? 'fa-pause-circle' : 'fa-stop-circle';
-            
-            statusContainer.innerHTML += `
-                <div class="status-item ${statusClass}">
-                    <h3><i class="far ${icon}"></i> ${data.name || 'Станок #3'}</h3>
-                    <p>${data.type || 'ЧПУ Станок'}</p>
-                    <p>Состояние: <strong>${statusText}</strong></p>
-                    <p>Задача: ${data.task || 'Не назначена'}</p>
-                    <p>Осталось: ${data.remaining ? data.remaining + ' мин' : 'Н/Д'}</p>
-                    <p>Прогресс: ${data.progress || '0'}%</p>
-                </div>
-            `;
-            
-            // Добавляем статические данные для демонстрации (в реальном приложении будут запрашиваться с API)
-            statusContainer.innerHTML += `
-                <div class="status-item idle">
-                    <h3><i class="far fa-pause-circle"></i> Станок #1</h3>
-                    <p>Токарный ЧПУ</p>
-                    <p>Состояние: <strong>Ожидание</strong></p>
-                    <p>След. задача: #2457</p>
-                </div>
-                <div class="status-item stopped">
-                    <h3><i class="far fa-stop-circle"></i> Станок #2</h3>
-                    <p>Фрезерный ЧПУ</p>
-                    <p>Состояние: <strong>Остановлен</strong></p>
-                    <p>Причина: Обслуживание</p>
-                </div>
-                <div class="status-item running">
-                    <h3><i class="far fa-play-circle"></i> Станок #4</h3>
-                    <p>Фрезерный ЧПУ</p>
-                    <p>Состояние: <strong>Работает</strong></p>
-                    <p>Задача: #2455</p>
-                    <p>Осталось: 1 ч 15 мин</p>
-                </div>
-            `;
-        }
-        
-        // Загружаем данные при запуске
-        document.addEventListener('DOMContentLoaded', function() {
-            fetchMachineData();
-            
-            // Обновляем данные каждые 30 секунд
-            setInterval(fetchMachineData, 30000);
-        });
-    </script>
 </body>
 </html>
