@@ -3,168 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Резюме Алиханова Павла — Инженер">
-    <title>Резюме — Алиханов Павел</title>
-    <!-- Подключение внешнего CSS файла -->
+    <title>Резюме | Алиханов Павел</title>
+    <!-- Подключение стилей -->
     <link rel="stylesheet" href="style.css">
+    <!-- Шрифт Inter для современного вида -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Навигационная панель -->
+
+    <!-- Навигация -->
     <nav class="navbar">
-        <div class="container nav-container">
-            <div class="logo">АП</div>
+        <div class="container nav-content">
+            <div class="logo">AP.</div>
             <ul class="nav-links">
                 <li><a href="#about">Обо мне</a></li>
                 <li><a href="#experience">Опыт</a></li>
-                <li><a href="#education">Образование</a></li>
                 <li><a href="#skills">Навыки</a></li>
-                <li><a href="#contact">Контакты</a></li>
+                <li><a href="#contact" class="btn-nav">Связаться</a></li>
             </ul>
-            <button class="mobile-menu-btn" aria-label="Меню">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </div>
     </nav>
 
-    <!-- Главная секция -->
-    <header class="hero" id="about">
-        <div class="container hero-content fade-in">
-            <div class="hero-text">
-                <h1>Алиханов Павел</h1>
-                <p class="position">Инженер-разработчик</p>
-                <p class="description">
-                    Специалист с опытом создания веб-приложений и автоматизации процессов. 
-                    Увлечён современными технологиями и постоянным развитием навыков.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#" class="btn btn-primary" id="downloadBtn">Скачать резюме</a>
-                    <a href="#contact" class="btn btn-secondary" id="contactBtn">Связаться со мной</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="image-placeholder">
-                    <span>Фото</span>
-                </div>
+    <!-- Секция: Обо мне (Hero) -->
+    <header id="about" class="hero-section">
+        <div class="container hero-content hidden">
+            <h1>Алиханов Павел</h1>
+            <h2 class="subtitle">Инженер-разработчик</h2>
+            <p class="bio">
+                Привет! Я увлеченный инженер с опытом создания эффективных технических решений. 
+                Люблю сложные задачи, чистый код и современные технологии. Всегда стремлюсь к оптимизации процессов.
+            </p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary" download>Скачать резюме</a>
+                <a href="#contact" class="btn btn-outline" onclick="scrollToContact(event)">Связаться со мной</a>
             </div>
         </div>
     </header>
 
-    <!-- Опыт работы -->
-    <section class="section" id="experience">
+    <!-- Секция: Опыт работы -->
+    <section id="experience" class="section">
         <div class="container">
-            <h2 class="section-title fade-in">Опыт работы</h2>
-            <div class="experience-grid">
+            <h2 class="section-title hidden">Опыт работы</h2>
+            <div class="timeline">
+                
                 <!-- Место работы 1 -->
-                <div class="experience-card fade-in">
-                    <div class="card-header">
-                        <h3>Ведущий разработчик</h3>
-                        <span class="company">ООО "ТехноСофт"</span>
+                <div class="timeline-item hidden">
+                    <div class="timeline-date">2021 — Настоящее время</div>
+                    <div class="timeline-content">
+                        <h3>Инженер-программист</h3>
+                        <span class="company">Tech Solutions Ltd.</span>
+                        <p>Разработка микросервисов на Python, оптимизация баз данных, участие в архитектурном планировании проектов.</p>
                     </div>
-                    <p class="period">2022 — Настоящее время</p>
-                    <ul class="responsibilities">
-                        <li>Разработка веб-приложений на HTML, CSS, JavaScript</li>
-                        <li>Оптимизация производительности сайтов</li>
-                        <li>Взаимодействие с командой дизайнеров</li>
-                    </ul>
                 </div>
+
                 <!-- Место работы 2 -->
-                <div class="experience-card fade-in">
-                    <div class="card-header">
-                        <h3>Младший разработчик</h3>
-                        <span class="company">ЗАО "ВебСтудия"</span>
+                <div class="timeline-item hidden">
+                    <div class="timeline-date">2019 — 2021</div>
+                    <div class="timeline-content">
+                        <h3>Младший инженер</h3>
+                        <span class="company">Стартап "Инновация"</span>
+                        <p>Поддержка существующего кода, написание тестов, разработка фронтенд-компонентов на React.</p>
                     </div>
-                    <p class="period">2020 — 2022</p>
-                    <ul class="responsibilities">
-                        <li>Вёрстка адаптивных страниц</li>
-                        <li>Поддержка существующих проектов</li>
-                        <li>Написание технической документации</li>
-                    </ul>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Образование -->
-    <section class="section section-alt" id="education">
+    <!-- Секция: Образование -->
+    <section id="education" class="section bg-light">
         <div class="container">
-            <h2 class="section-title fade-in">Образование</h2>
-            <div class="education-card fade-in">
-                <div class="edu-header">
-                    <h3>МГТУ "СТАНКИН"</h3>
-                    <span class="degree">Бакалавр инженерии</span>
-                </div>
-                <p class="specialty">Специальность: Информационные системы и технологии</p>
-                <p class="period">2016 — 2020</p>
+            <h2 class="section-title hidden">Образование</h2>
+            <div class="education-card hidden">
+                <h3>МГТУ "СТАНКИН"</h3>
+                <p>Факультет информационных технологий и робототехники</p>
+                <span class="degree">Бакалавр, Информатика и вычислительная техника</span>
             </div>
         </div>
     </section>
 
-    <!-- Навыки -->
-    <section class="section" id="skills">
+    <!-- Секция: Навыки -->
+    <section id="skills" class="section">
         <div class="container">
-            <h2 class="section-title fade-in">Навыки</h2>
-            <div class="skills-container">
-                <div class="skills-group fade-in">
-                    <h3>Технические навыки</h3>
-                    <div class="skills-list">
-                        <span class="skill-tag">HTML5</span>
-                        <span class="skill-tag">CSS3</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">Responsive Design</span>
-                        <span class="skill-tag">DOM API</span>
+            <h2 class="section-title hidden">Навыки</h2>
+            <div class="skills-grid hidden">
+                <!-- Технические навыки -->
+                <div class="skill-category">
+                    <h3>Hard Skills</h3>
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">C++</span>
+                        <span class="tag">HTML5/CSS3</span>
+                        <span class="tag">Git</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">SQL</span>
                     </div>
                 </div>
-                <div class="skills-group fade-in">
-                    <h3>Мягкие навыки</h3>
-                    <div class="skills-list">
-                        <span class="skill-tag">Коммуникабельность</span>
-                        <span class="skill-tag">Работа в команде</span>
-                        <span class="skill-tag">Тайм-менеджмент</span>
-                        <span class="skill-tag">Решение проблем</span>
-                        <span class="skill-tag">Обучаемость</span>
+                <!-- Мягкие навыки -->
+                <div class="skill-category">
+                    <h3>Soft Skills</h3>
+                    <div class="tags">
+                        <span class="tag">Коммуникабельность</span>
+                        <span class="tag">Работа в команде</span>
+                        <span class="tag">Тайм-менеджмент</span>
+                        <span class="tag">Аналитическое мышление</span>
+                        <span class="tag">Английский (B2)</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Контакты -->
-    <section class="section section-alt" id="contact">
+    <!-- Секция: Контакты -->
+    <section id="contact" class="section bg-light">
         <div class="container">
-            <h2 class="section-title fade-in">Связаться со мной</h2>
-            <form class="contact-form fade-in" id="contactForm">
-                <div class="form-group">
-                    <label for="name">Имя</label>
-                    <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
-                    <span class="error-message" id="nameError"></span>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="example@mail.ru" required>
-                    <span class="error-message" id="emailError"></span>
-                </div>
-                <div class="form-group">
-                    <label for="message">Сообщение</label>
-                    <textarea id="message" name="message" rows="5" placeholder="Введите ваше сообщение" required></textarea>
-                    <span class="error-message" id="messageError"></span>
-                </div>
-                <button type="submit" class="btn btn-primary btn-full">Отправить сообщение</button>
-                <p class="form-status" id="formStatus"></p>
-            </form>
+            <h2 class="section-title hidden">Связаться со мной</h2>
+            <div class="contact-wrapper hidden">
+                <form id="contactForm" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Ваше имя</label>
+                        <input type="text" id="name" name="name" required placeholder="Иван Иванов">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="ivan@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Ваше сообщение..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </form>
+            </div>
         </div>
     </section>
 
-    <!-- Подвал -->
-    <footer class="footer">
+    <footer>
         <div class="container">
-            <p>&copy; 2025 Алиханов Павел. Все права защищены.</p>
+            <p>&copy; 2023 Алиханов Павел. Все права защищены.</p>
         </div>
     </footer>
 
-    <!-- Подключение внешнего JS файла -->
-    <script src="script.js" defer></script>
+    <!-- Подключение скриптов -->
+    <script src="script.js"></script>
 </body>
 </html>
