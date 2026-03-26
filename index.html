@@ -3,102 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Резюме | Индивидуальное задание 4</title>
-    
-    <!-- Подключаем внешний CSS файл -->
+    <title>Мое Резюме - Лаба 3</title>
+    <!-- Подключение внешнего CSS файла -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Шапка с фото -->
-        <div class="header">
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Фото" class="avatar">
-            <h1 id="fullName">Алексей Соколов</h1>
-            <div class="title">Full-stack разработчик | 5 лет опыта</div>
-        </div>
 
-        <div class="content">
-            <!-- Секция с информацией -->
-            <div class="section">
-                <h2>📋 Личная информация</h2>
-                <div class="info-grid">
-                    <div class="info-card">
-                        <label>👤 Имя</label>
-                        <div class="value" id="displayName">Алексей</div>
-                    </div>
-                    <div class="info-card">
-                        <label>📛 Фамилия</label>
-                        <div class="value" id="displaySurname">Соколов</div>
-                    </div>
-                    <div class="info-card">
-                        <label>📧 Email</label>
-                        <div class="value">alexey.sokolov@example.com</div>
-                    </div>
-                    <div class="info-card">
-                        <label>📍 Город</label>
-                        <div class="value">Москва, Россия</div>
-                    </div>
-                </div>
-            </div>
+    <div class="resume-container">
+        <header>
+            <!-- Фото (заглушка, можно заменить на свою) -->
+            <img src="https://via.placeholder.com/150" alt="Фото студента" class="photo">
+            <h1 id="name">Иван</h1>
+            <h2 id="surname">Иванов</h2>
+        </header>
 
-            <!-- Секция с возрастом (из задания 3) -->
-            <div class="section">
-                <h2>🎂 Возраст</h2>
-                <div class="age-section">
-                    <div class="age-display">
-                        <div style="margin-bottom: 15px;">
-                            <button class="btn-primary" onclick="askAge()">📅 Указать возраст</button>
-                        </div>
-                        <div id="ageResult">
-                            <span style="color: #7f8c8d;">Возраст не указан</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <section class="info">
+            <p>Студент группы ПИ-202</p>
+            <p>Навыки: HTML, CSS, JavaScript</p>
+        </section>
 
-            <!-- Секция с навыками -->
-            <div class="section">
-                <h2>💡 Ключевые навыки</h2>
-                <div class="info-grid">
-                    <div class="info-card">
-                        <label>💻 Frontend</label>
-                        <div class="value">React, Vue, Angular</div>
-                    </div>
-                    <div class="info-card">
-                        <label>⚙️ Backend</label>
-                        <div class="value">Node.js, Python, PHP</div>
-                    </div>
-                    <div class="info-card">
-                        <label>🗄️ Базы данных</label>
-                        <div class="value">MySQL, PostgreSQL, MongoDB</div>
-                    </div>
-                    <div class="info-card">
-                        <label>🎨 Дизайн</label>
-                        <div class="value">Figma, Adobe XD</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Секция для редактирования фамилии -->
-            <div class="edit-section">
-                <h3>✏️ Редактирование данных</h3>
-                <div class="input-group">
-                    <input type="text" id="surnameInput" placeholder="Введите новую фамилию">
-                    <button class="btn-primary" onclick="changeSurname()">Изменить фамилию</button>
-                </div>
-                <div class="input-group">
-                    <input type="text" id="nameInput" placeholder="Введите новое имя">
-                    <button class="btn-primary" onclick="changeName()">Изменить имя</button>
-                </div>
-                <div class="input-group">
-                    <button class="btn-success" onclick="changeRandomColor()">🎨 Случайный цвет фона</button>
-                    <button class="btn-secondary" onclick="resetColor()">↺ Сбросить цвет фона</button>
-                </div>
-            </div>
-        </div>
+        <section class="controls">
+            <h3>Редактирование</h3>
+            <!-- Поле ввода для новой фамилии -->
+            <input type="text" id="surnameInput" placeholder="Введите новую фамилию">
+            <!-- Кнопка изменения фамилии -->
+            <button id="changeSurnameBtn">Изменить фамилию</button>
+            <!-- Кнопка изменения фона -->
+            <button id="changeBgBtn">Случайный цвет фона</button>
+        </section>
     </div>
 
-    <!-- Подключаем внешний JS файл -->
-    <script src="script.js"></script>
+    <!-- Подключение внешнего JS файла (defer гарантирует загрузку после HTML) -->
+    <script src="script.js" defer></script>
 </body>
 </html>
