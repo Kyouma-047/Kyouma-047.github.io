@@ -1,75 +1,79 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. Анимация появления элементов при скролле ---
-    // Используем Intersection Observer API для отслеживания видимости элементов
+    // --- 1. Мобильное меню ---
+    const burger = document.getElementById('burgerMenu');
+    const navLinks = document.querySelector('.nav-links');
+
+    burger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    // Закрытие меню при клике на ссылку
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
+    });
+
+    // --- 2. Анимация появления при скролле (Intersection Observer) ---
     const observerOptions = {
-        root: null, // viewport
-        rootMargin: '0px',
-        threshold: 0.1 // Срабатывает, когда 10% элемента видно
+        threshold: 0.1, // Срабатывает, когда 10% элемента видно
+        rootMargin: "0px 0px -50px 0px"
     };
 
-    const observer = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('show');
-                observer.unobserve(entry.target); // Анимируем только один раз
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Анимировать только один раз
             }
         });
     }, observerOptions);
 
-    // Находим все элементы с классом .hidden и начинаем за ними следить
-    const hiddenElements = document.querySelectorAll('.hidden');
-    hiddenElements.forEach((el) => observer.observe(el));
+    // Следим за элементами с классом .hidden
+    document.querySelectorAll('.hidden').forEach(el => observer.observe(el));
 
-
-    // --- 2. Плавный скролл к контактам ---
+    // --- 3. Плавный скролл ---
     window.scrollToContact = function(event) {
-        // Предотвращаем стандартное поведение ссылки
-        if(event) event.preventDefault();
-        
+        event.preventDefault();
         const contactSection = document.getElementById('contact');
-        contactSection.scrollIntoView({ 
-            behavior: 'smooth' 
-        });
+        contactSection.scrollIntoView({ behavior: 'smooth' });
     };
 
+    // --- 4. Валидация формы ---
+    const form = document.getElementById('contactForm');
 
-    // --- 3. Валидация и обработка формы ---
-    const contactForm = document.getElementById('contactForm');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault(); // Останавливаем перезагрузку страницы
-
-        // Получаем данные
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
         const message = document.getElementById('message').value.trim();
+        const btn = form.querySelector('button');
 
-        // Простая валидация
-        if (name === '' || email === '' || message === '') {
+        // Простая проверка
+        if (!name || !email || !message) {
             alert('Пожалуйста, заполните все поля!');
             return;
         }
 
-        // Проверка формата email (простая регулярка)
+        // Проверка Email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            alert('Пожалуйста, введите корректный email адрес.');
+            alert('Введите корректный email адрес.');
             return;
         }
 
-        // Имитация отправки данных
-        const submitBtn = contactForm.querySelector('button');
-        const originalText = submitBtn.innerText;
-        
-        submitBtn.innerText = 'Отправка...';
-        submitBtn.disabled = true;
+        // Имитация отправки
+        const originalText = btn.innerText;
+        btn.innerText = 'Отправка...';
+        btn.disabled = true;
 
         setTimeout(() => {
-            alert(`Спасибо, ${name}! Ваше сообщение успешно отправлено.`);
-            contactForm.reset(); // Очистить форму
-            submitBtn.innerText = originalText;
-            submitBtn.disabled = false;
+            alert(`Спасибо, ${name}! Сообщение отправлено.`);
+            form.reset();
+            btn.innerText = originalText;
+            btn.disabled = false;
         }, 1500);
     });
 });
