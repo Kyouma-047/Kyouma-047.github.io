@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резюме | Индивидуальное задание 4</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* Основной контейнер с тенью */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Шапка резюме */
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            padding: 40px;
+            text-align: center;
+            border-bottom: 3px solid #f1c40f;
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #f1c40f;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            object-fit: cover;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .title {
+            font-size: 1.2rem;
+            color: #f1c40f;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Основное содержание */
+        .content {
+            padding: 40px;
+        }
+
+        /* Секции */
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: #fafafa;
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            border-color: #3498db;
+            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+            display: inline-block;
+            text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        /* Информация о пользователе */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            border-color: #3498db;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .info-card label {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #7f8c8d;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .info-card .value {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        /* Поле ввода и кнопки */
+        .edit-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid #3498db;
+            margin-top: 20px;
+        }
+
+        .edit-section h3 {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px 18px;
+            font-size: 1rem;
+            border: 2px solid #d0d0d0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        input[type="text"]:hover {
+            border-color: #3498db;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2980b9 0%, #21618c 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-success:hover {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+        }
+
+        /* Блок возраста */
+        .age-section {
+            margin-top: 20px;
+        }
+
+        .age-display {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .age-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .section h2 {
+                font-size: 1.4rem;
+            }
+            
+            button {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Шапка с фото -->
+        <div class="header">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Фото" class="avatar">
+            <h1 id="fullName">Алексей Соколов</h1>
+            <div class="title">Full-stack разработчик | 5 лет опыта</div>
+        </div>
+
+        <div class="content">
+            <!-- Секция с информацией -->
+            <div class="section">
+                <h2>📋 Личная информация</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <label>👤 Имя</label>
+                        <div class="value" id="displayName">Алексей</div>
+                    </div>
+                    <div class="info-card">
+                        <label>📛 Фамилия</label>
+                        <div class="value" id="displaySurname">Соколов</div>
+                    </div>
+                    <div class="info-card">
+                        <label>📧 Email</label>
+                        <div class="value">alexey.sokolov@example.com</div>
+                    </div>
+                    <div class="info-card">
+                        <label>📍 Город</label>
+                        <div class="value">Москва, Россия</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Секция с возрастом (из задания 3) -->
+            <div class="section">
+                <h2>🎂 Возраст</h2>
+                <div class="age-section">
+                    <div class="age-display">
+                        <div style="margin-bottom: 15px;">
+                            <button class="btn-primary" onclick="askAge()">📅 Указать возраст</button>
+                        </div>
+                        <div id="ageResult" style="margin-top: 15px;">
+                            <span style="color: #7f8c8d;">Возраст не указан</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Секция с навыками -->
+            <div class="section">
+                <h2>💡 Ключевые навыки</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <label>💻 Frontend</label>
+                        <div class="value">React, Vue, Angular</div>
+                    </div>
+                    <div class="info-card">
+                        <label>⚙️ Backend</label>
+                        <div class="value">Node.js, Python, PHP</div>
+                    </div>
+                    <div class="info-card">
+                        <label>🗄️ Базы данных</label>
+                        <div class="value">MySQL, PostgreSQL, MongoDB</div>
+                    </div>
+                    <div class="info-card">
+                        <label>🎨 Дизайн</label>
+                        <div class="value">Figma, Adobe XD</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Секция для редактирования фамилии -->
+            <div class="edit-section">
+                <h3>✏️ Редактирование данных</h3>
+                <div class="input-group">
+                    <input type="text" id="surnameInput" placeholder="Введите новую фамилию">
+                    <button class="btn-primary" onclick="changeSurname()">Изменить фамилию</button>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="nameInput" placeholder="Введите новое имя">
+                    <button class="btn-primary" onclick="changeName()">Изменить имя</button>
+                </div>
+                <div class="input-group">
+                    <button class="btn-success" onclick="changeRandomColor()">🎨 Случайный цвет фона</button>
+                    <button class="btn-secondary" onclick="resetColor()">↺ Сбросить цвет фона</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Переменные для хранения данных
+        let currentAge = null;
+        
+        // Функция изменения фамилии
+        function changeSurname() {
+            let newSurname = document.getElementById('surnameInput').value;
+            
+            if (newSurname === "") {
+                alert("Пожалуйста, введите фамилию!");
+                return;
+            }
+            
+            // Обновляем отображение фамилии
+            document.getElementById('displaySurname').innerHTML = newSurname;
+            
+            // Обновляем полное имя в шапке
+            let name = document.getElementById('displayName').innerHTML;
+            document.getElementById('fullName').innerHTML = `${name} ${newSurname}`;
+            
+            // Очищаем поле ввода
+            document.getElementById('surnameInput').value = "";
+            
+            // Визуальный фидбек
+            let btn = event.target;
+            btn.style.transform = 'scale(0.98)';
+            setTimeout(() => { btn.style.transform = ''; }, 200);
+        }
+        
+        // Функция изменения имени
+        function changeName() {
+            let newName = document.getElementById('nameInput').value;
+            
+            if (newName === "") {
+                alert("Пожалуйста, введите имя!");
+                return;
+            }
+            
+            // Обновляем отображение имени
+            document.getElementById('displayName').innerHTML = newName;
+            
+            // Обновляем полное имя в шапке
+            let surname = document.getElementById('displaySurname').innerHTML;
+            document.getElementById('fullName').innerHTML = `${newName} ${surname}`;
+            
+            // Очищаем поле ввода
+            document.getElementById('nameInput').value = "";
+        }
+        
+        // Функция запроса возраста (из задания 3)
+        function askAge() {
+            let age;
+            let isValid = false;
+            
+            while (!isValid) {
+                age = prompt("Введите ваш возраст:", "");
+                
+                if (age === null) {
+                    alert("Пожалуйста, введите возраст!");
+                    continue;
+                }
+                
+                if (age === "") {
+                    alert("Вы не ввели возраст. Попробуйте снова!");
+                    continue;
+                }
+                
+                age = Number(age);
+                
+                if (isNaN(age) || age <= 0 || age > 120) {
+                    alert("Пожалуйста, введите корректный возраст (от 1 до 120)");
+                    continue;
+                }
+                
+                let confirmAge = confirm(`Вы ввели возраст: ${age} лет. Всё верно?`);
+                
+                if (confirmAge) {
+                    currentAge = age;
+                    document.getElementById('ageResult').innerHTML = `
+                        <span style="color: #2ecc71;">✅ Ваш возраст:</span>
+                        <span class="age-value">${age} лет</span>
+                    `;
+                    isValid = true;
+                } else {
+                    alert("Давайте попробуем еще раз!");
+                }
+            }
+        }
+        
+        // Функция изменения цвета фона на случайный
+        function changeRandomColor() {
+            const colors = [
+                'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+                'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+                'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
+                'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+                'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
+                'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)'
+            ];
+            
+            const randomIndex = Math.floor(Math.random() * colors.length);
+            document.body.style.background = colors[randomIndex];
+            
+            // Сохраняем цвет в localStorage
+            localStorage.setItem('savedBgColor', colors[randomIndex]);
+        }
+        
+        // Функция сброса цвета фона
+        function resetColor() {
+            document.body.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            localStorage.removeItem('savedBgColor');
+        }
+        
+        // Восстанавливаем сохраненный цвет фона при загрузке
+        function loadSavedColor() {
+            const savedColor = localStorage.getItem('savedBgColor');
+            if (savedColor) {
+                document.body.style.background = savedColor;
+            }
+        }
+        
+        // Загружаем сохраненные данные
+        loadSavedColor();
+    </script>
+</body>
+</html>
